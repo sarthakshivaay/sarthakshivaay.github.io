@@ -1,0 +1,503 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarthak Tyagi - Data Science & AI Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        nav {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #667eea;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        header p {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+        .tagline {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid white;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        .btn-outline:hover {
+            background: white;
+            color: #667eea;
+        }
+        section {
+            background: white;
+            padding: 4rem 2rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        section h2 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .project-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+        .project-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+            transform: translateY(-5px);
+        }
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .project-card h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        .project-tagline {
+            font-size: 0.95rem;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .project-description {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .tech-badge {
+            display: inline-block;
+            background: #e9ecef;
+            color: #667eea;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .project-links a {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            flex: 1;
+            text-align: center;
+        }
+        .project-links a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .skill-category {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .skill-category h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        .skill-category p {
+            color: #666;
+            line-height: 1.8;
+        }
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        .about-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #666;
+        }
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+        .highlight {
+            color: #667eea;
+            font-weight: 600;
+        }
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .stat-box h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .stat-box p {
+            opacity: 0.9;
+        }
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .contact-method {
+            text-align: center;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        .contact-method:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .contact-method h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+        .contact-method:hover h3 {
+            color: white;
+        }
+        .contact-method a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            word-break: break-all;
+        }
+        .contact-method:hover a {
+            color: white;
+        }
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        footer p {
+            opacity: 0.8;
+        }
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header id="home">
+        <div class="container">
+            <h1>Sarthak Tyagi</h1>
+            <p>Data Science | AI | Automation</p>
+            <p class="tagline">Growth & Automation Analyst | MSc Artificial Intelligence | Building end-to-end ML solutions that drive business impact</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn">View Projects</a>
+                <a href="https://github.com/sarthakshivaay" class="btn btn-outline" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/sarthakshivaay" class="btn btn-outline" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="projects">
+        <div class="container">
+            <h2>🚀 Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-icon">📊</div>
+                    <h3>Rossmann Store Sales Forecasting</h3>
+                    <p class="project-tagline">Multi-model retail forecasting system</p>
+                    <p class="project-description">End-to-end time-series forecasting dashboard comparing Prophet, ARIMA, LSTM, and Ensemble models. Interactive Streamlit app with store-level predictions, model comparison, ROI calculator, and promotional impact analysis.</p>
+                    <div class="project-tech">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Prophet</span>
+                        <span class="tech-badge">Streamlit</span>
+                        <span class="tech-badge">scikit-learn</span>
+                        <span class="tech-badge">Time-Series</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://sales-forecasting-system-48aguxznlnrn2ewhjkwove.streamlit.app/" target="_blank">Live Demo</a>
+                        <a href="https://github.com/sarthakshivaay/sales-forecasting-system" target="_blank">Code</a>
+                    </div>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: #667eea; font-weight: 600;">✅ 13.42% RMSPE (Best Model) | €236+ savings/store | 1,115 stores | 844K+ records</p>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">🛍️</div>
+                    <h3>E-Commerce Customer Churn Prediction</h3>
+                    <p class="project-tagline">AI-driven customer retention intelligence</p>
+                    <p class="project-description">Random Forest classifier predicting customer churn risk from behavioral features. Interactive dashboard with feature importance view, retention recommendations, and probability scoring for targeted campaigns.</p>
+                    <div class="project-tech">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">scikit-learn</span>
+                        <span class="tech-badge">Streamlit</span>
+                        <span class="tech-badge">pandas</span>
+                        <span class="tech-badge">ML Classification</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://ecommerce-churn-prediction-demo-woius4ern3kbjvn2vutrvq.streamlit.app/" target="_blank">Live Demo</a>
+                        <a href="https://github.com/sarthakshivaay/ecommerce-churn-prediction-demo" target="_blank">Code</a>
+                    </div>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: #667eea; font-weight: 600;">✅ Feature Importance Analysis | Retention Strategies | Production-Ready</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2>🛠️ Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>📊 Programming</h3>
+                    <p>Python (Advanced), SQL, Bash/PowerShell, Git/GitHub, Docker basics</p>
+                </div>
+                <div class="skill-category">
+                    <h3>🤖 Machine Learning & AI</h3>
+                    <p>scikit-learn, Prophet, ARIMA, LSTM, Random Forest, Classification, Time-Series, Feature Engineering</p>
+                </div>
+                <div class="skill-category">
+                    <h3>📈 Data & Analytics</h3>
+                    <p>pandas, numpy, Data Cleaning, EDA, Feature Engineering, A/B Testing, Business Metrics (RMSPE, AUC)</p>
+                </div>
+                <div class="skill-category">
+                    <h3>🎨 Visualization & Web</h3>
+                    <p>Streamlit, matplotlib, seaborn, Google Sheets, Interactive Dashboards, UX Design</p>
+                </div>
+                <div class="skill-category">
+                    <h3>🔧 Tools & Platforms</h3>
+                    <p>VS Code, Jupyter, Streamlit Cloud, GitHub, Kaggle, Google Cloud, Perplexity AI</p>
+                </div>
+                <div class="skill-category">
+                    <h3>💼 Business & Domain</h3>
+                    <p>E-commerce, Sales Forecasting, Customer Churn, Automation, Growth Analytics, GDPR Compliance, CRM/ERP</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>👨‍💻 About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm a <span class="highlight">data scientist and automation specialist</span> with a passion for turning data into actionable insights. Currently pursuing my <span class="highlight">MSc in Artificial Intelligence</span> at BTU while working as a <span class="highlight">Growth & Automation Analyst</span> at ComfNet Solutions GmbH.</p>
+                    <p>My expertise spans <span class="highlight">end-to-end ML pipelines</span>: data engineering, model selection, evaluation, and deployment. I specialize in <span class="highlight">time-series forecasting, customer analytics, and business intelligence</span>.</p>
+                    <p>When not building models, I'm optimizing business processes, exploring new ML architectures, or contributing to open-source projects. I believe in <span class="highlight">transparency, reproducibility, and user-centric design</span>.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-box">
+                        <h3>4+</h3>
+                        <p>Years Professional Experience</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>10+</h3>
+                        <p>ML Projects Completed</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>MSc AI</h3>
+                        <p>BTU Cottbus-Senftenberg</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>2+</h3>
+                        <p>Live Streamlit Apps</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>📬 Get In Touch</h2>
+            <div class="contact-methods">
+                <div class="contact-method">
+                    <h3>📧 Email</h3>
+                    <a href="mailto:sarthaktyagi@outlook.com">sarthaktyagi@outlook.com</a>
+                </div>
+                <div class="contact-method">
+                    <h3>🔗 LinkedIn</h3>
+                    <a href="https://www.linkedin.com/in/sarthakshivaay" target="_blank">linkedin.com/in/sarthakshivaay</a>
+                </div>
+                <div class="contact-method">
+                    <h3>🐙 GitHub</h3>
+                    <a href="https://github.com/sarthakshivaay" target="_blank">github.com/sarthakshivaay</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Sarthak Tyagi. All rights reserved.</p>
+            <p>Crafted with ❤️ and powered by data | <a href="https://github.com/sarthakshivaay/sarthakshivaay.github.io" style="color: #667eea;">View Source</a></p>
+        </div>
+    </footer>
+</body>
+</html>
